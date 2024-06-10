@@ -5,9 +5,10 @@ function M.setup(config)
   config.webgpu_power_preference = 'HighPerformance'
   config.audible_bell = 'Disabled'
 
-  config.color_scheme = 'nord'
+  config.color_scheme = 'onenord'
+  config.scrollback_lines = 10000
   config.tab_bar_at_bottom = true
-  config.window_padding = { left = 5, right = 5, top = 5, bottom = 5 }
+  config.window_padding = { left = 1, right = 1, top = 1, bottom = 1 }
 end
 
 return M
