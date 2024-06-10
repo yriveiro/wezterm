@@ -1,6 +1,6 @@
-local w = require 'wezterm'
+local wezterm = require 'wezterm'
 
-local act = w.action
+local act = wezterm.action
 local M = {}
 
 M.cmd_mode = 'CMD'
@@ -25,7 +25,7 @@ function M.setup(config)
     { mods = M.leader_mode, key = 'l', action = act { ActivateTabRelative = 1 } },
     { mods = M.leader_mode, key = 'h', action = act { ActivateTabRelative = -1 } },
     -- show the pane selection mode, but have it swap the active and selected panes
-    { mods = M.leader_mode, key = 's', action = w.action.PaneSelect { mode = 'Activate' } },
+    { mods = M.leader_mode, key = 's', action = wezterm.action.PaneSelect { mode = 'Activate' } },
     -- Clipboard
     { mods = M.cmd_mode, key = 'c', action = act.CopyTo 'Clipboard' },
     { mods = M.cmd_mode, key = 'v', action = act.PasteFrom 'Clipboard' },
