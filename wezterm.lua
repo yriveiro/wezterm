@@ -1,10 +1,11 @@
-local w = require 'wezterm'
-local config = w.config_builder()
+local wezterm = require 'wezterm'
+local config = wezterm.config_builder()
 
-w.log_info 'reloading'
+wezterm.log_info 'reloading'
 
+require('core.tabs').setup(config)
 require('core.fonts').setup(config)
-require('core.ui').setup(config)
 require('core.keys').setup(config)
+require('core.ui').setup(config)
 
 return config
