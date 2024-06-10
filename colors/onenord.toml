@@ -43,8 +43,8 @@ brights = [
 background = "#2E3440"
 
 [colors.tab_bar.active_tab]
-bg_color = "#353B49"
-fg_color = "#EBCB8B"
+bg_color = "#88C0D0"
+fg_color = "#2E3440"
 
 [colors.tab_bar.inactive_tab]
 bg_color = "#3F4758"
