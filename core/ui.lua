@@ -8,7 +8,12 @@ function M.setup(config)
   config.color_scheme = 'onenord'
   config.scrollback_lines = 10000
   config.tab_bar_at_bottom = true
-  config.window_padding = { left = 2, right = 2, top = 2, bottom = 2 }
+  config.window_padding = {
+    left = '0.5cell',
+    right = '0.5cell',
+    top = '0.5cell',
+    bottom = '0.0cell',
+  }
 end
 
 return M
