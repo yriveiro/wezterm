@@ -10,7 +10,7 @@ function M.setup(config)
 
   -- Tab Fonts
   config.window_frame = {
-    font = wezterm.font 'MyFont Nerd Font Mon',
+    font = wezterm.font 'MyFont Nerd Font Mono',
     font_size = 14,
   }
 end
