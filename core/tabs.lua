@@ -1,4 +1,5 @@
 local ipairs = ipairs
+local string = string
 local wezterm = require 'wezterm'
 
 local M = {}
@@ -7,7 +8,7 @@ M.arrow_solid = ''
 M.arrow_thin = ''
 
 M.icons = {
-  ['debug'] = wezterm.nerdfonts.dev_terminal,
+  ['debug'] = wezterm.nerdfonts.cod_debug_console,
   ['bash'] = wezterm.nerdfonts.cod_terminal_bash,
   ['btm'] = wezterm.nerdfonts.mdi_chart_donut_variant,
   ['btop'] = wezterm.nerdfonts.md_chart_areaspline,
@@ -31,15 +32,18 @@ M.icons = {
   ['vim'] = wezterm.nerdfonts.dev_vim,
   ['wget'] = wezterm.nerdfonts.mdi_arrow_down_box,
   ['zsh'] = wezterm.nerdfonts.dev_terminal,
+  ['obsidian'] = wezterm.nerdfonts.cod_lightbulb,
 }
 
 function M.title(tab, max_width)
   local title = (tab.tab_title and #tab.tab_title > 0) and tab.tab_title or tab.active_pane.title
-  local process, other = title:match '^(%S+)%s*%-?%s*%s*(.*)$'
+  local process, custom = title:match '^(%S+)%s*%-?%s*%s*(.*)$'
   local icon = ''
 
+  wezterm.log_info { custom }
+
   if M.icons[string.lower(process)] then
-    icon = M.icons[process] .. ' ' .. (other or '')
+    icon = (M.icons[string.lower(process)] or wezterm.nerdfonts.cod_workspace_unknown) .. ' '
   end
 
   local is_zoomed = false
@@ -49,6 +53,10 @@ function M.title(tab, max_width)
       is_zoomed = true
       break
     end
+  end
+
+  if custom ~= '' then
+    title = custom
   end
 
   if is_zoomed then -- or (#tab.panes > 1 and not tab.is_active) then
