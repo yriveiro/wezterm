@@ -40,8 +40,6 @@ function M.title(tab, max_width)
   local process, custom = title:match '^(%S+)%s*%-?%s*%s*(.*)$'
   local icon = ''
 
-  wezterm.log_info { custom }
-
   if M.icons[string.lower(process)] then
     icon = (M.icons[string.lower(process)] or wezterm.nerdfonts.cod_workspace_unknown) .. ' '
   end
