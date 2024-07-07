@@ -5,6 +5,7 @@ function M.setup(config)
   config.webgpu_power_preference = 'HighPerformance'
   config.audible_bell = 'Disabled'
   config.window_decorations = 'RESIZE'
+  config.enable_kitty_graphics = true
 
   config.color_scheme = 'onenord'
   config.scrollback_lines = 10000
