@@ -25,8 +25,8 @@ function M.setup(config)
     { mods = M.leader_mode, key = '>', action = act.MoveTabRelative(1) },
     { mods = M.leader_mode, key = '<', action = act.MoveTabRelative(-1) },
     -- Activate Tabs
-    { mods = M.leader_mode, key = 'l', action = act { ActivateTabRelative = 1 } },
-    { mods = M.leader_mode, key = 'h', action = act { ActivateTabRelative = -1 } },
+    { mods = M.cmd_mode, key = 'LeftArrow', action = act { ActivateTabRelative = -1 } },
+    { mods = M.cmd_mode, key = 'RightArrow', action = act { ActivateTabRelative = 1 } },
     { mods = M.leader_mode, key = '1', action = act.ActivateTab(0) },
     { mods = M.leader_mode, key = '2', action = act.ActivateTab(1) },
     { mods = M.leader_mode, key = '3', action = act.ActivateTab(2) },
@@ -42,8 +42,7 @@ function M.setup(config)
     -- Clipboard
     { mods = M.cmd_mode, key = 'c', action = act.CopyTo 'Clipboard' },
     { mods = M.cmd_mode, key = 'v', action = act.PasteFrom 'Clipboard' },
-    { mods = M.leader_mode, key = 'Space', action = act.QuickSelect },
-    { mods = M.leader_mode, key = 'X', action = act.ActivateCopyMode },
+    { mods = M.leader_mode, key = 'Enter', action = act.ActivateCopyMode },
     { mods = M.leader_mode, key = 'f', action = act.Search 'CurrentSelectionOrEmptyString' },
     -- Panes
     { mods = M.leader_mode, key = 'z', action = act.TogglePaneZoomState },
@@ -60,14 +59,11 @@ function M.setup(config)
     -- Scroll
     { mods = M.cmd_mode, key = 'k', action = act.ClearScrollback 'ScrollbackAndViewport' },
     {
-      mods = M.leader,
+      mods = M.cmd_mode,
       key = ',',
       action = act.PromptInputLine {
         description = 'Enter new name for tab',
-        action = wezterm.action_callback(function(window, pane, line)
-          -- line will be `nil` if they hit escape without entering anything
-          -- An empty string if they just hit enter
-          -- Or the actual line of text they wrote
+        action = wezterm.action_callback(function(window, _, line)
           if line then
             window:active_tab():set_title(line)
           end
