@@ -36,12 +36,14 @@ M.icons = {
 }
 
 function M.title(tab, max_width)
-  local title = (tab.tab_title and #tab.tab_title > 0) and tab.tab_title or tab.active_pane.title
+  local title = (tab.tab_title and #tab.tab_title > 0) and tab.tab_title
+    or tab.active_pane.title
   local process, custom = title:match '^(%S+)%s*%-?%s*%s*(.*)$'
   local icon = ''
 
   if M.icons[string.lower(process)] then
-    icon = (M.icons[string.lower(process)] or wezterm.nerdfonts.cod_workspace_unknown) .. ' '
+    icon = (M.icons[string.lower(process)] or wezterm.nerdfonts.cod_workspace_unknown)
+      .. ' '
   end
 
   local is_zoomed = false
@@ -113,7 +115,11 @@ function M.setup(config)
         { Background = { Color = tab_bar.background } },
         { Foreground = { Color = tab_bar.active_tab.bg_color } },
         { Text = M.arrow_solid },
-        { Background = { Color = is_last and tab_bar.background or tab_bar.inactive_tab.bg_color } },
+        {
+          Background = {
+            Color = is_last and tab_bar.background or tab_bar.inactive_tab.bg_color,
+          },
+        },
         { Foreground = { Color = tab_bar.background } },
         { Text = M.arrow_solid },
       }
@@ -157,7 +163,8 @@ function M.setup(config)
         { Text = M.arrow_solid },
         {
           Background = {
-            Color = next_tab.is_active and tab_bar.active_tab.bg_color or tab_bar.inactive_tab.bg_color,
+            Color = next_tab.is_active and tab_bar.active_tab.bg_color
+              or tab_bar.inactive_tab.bg_color,
           },
         },
         { Foreground = { Color = tab_bar.background } },

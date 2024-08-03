@@ -11,16 +11,32 @@ function M.setup(config)
   config.disable_default_key_bindings = true
   config.send_composed_key_when_left_alt_is_pressed = true
 
-  config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 500 }
+  config.leader = { key = 'a', mods = 'META', timeout_milliseconds = 750 }
 
   config.keys = {
     -- New Tab
     { mods = M.leader_mode, key = 'c', action = act.SpawnTab 'CurrentPaneDomain' },
     -- Splits
-    { mods = M.leader_mode, key = '|', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
-    { mods = M.leader_mode, key = '-', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
-    { mods = M.leader_mode, key = 'LeftArrow', action = act.AdjustPaneSize { 'Left', 5 } },
-    { mods = M.leader_mode, key = 'RightArrow', action = act.AdjustPaneSize { 'Right', 5 } },
+    {
+      mods = M.leader_mode,
+      key = '|',
+      action = act.SplitHorizontal { domain = 'CurrentPaneDomain' },
+    },
+    {
+      mods = M.leader_mode,
+      key = '-',
+      action = act.SplitVertical { domain = 'CurrentPaneDomain' },
+    },
+    {
+      mods = M.leader_mode,
+      key = 'LeftArrow',
+      action = act.AdjustPaneSize { 'Left', 5 },
+    },
+    {
+      mods = M.leader_mode,
+      key = 'RightArrow',
+      action = act.AdjustPaneSize { 'Right', 5 },
+    },
     -- Move Tabs
     { mods = M.leader_mode, key = '>', action = act.MoveTabRelative(1) },
     { mods = M.leader_mode, key = '<', action = act.MoveTabRelative(-1) },
@@ -38,12 +54,20 @@ function M.setup(config)
     { mods = M.leader_mode, key = '9', action = act.ActivateTab(8) },
 
     -- show the pane selection mode, but have it swap the active and selected panes
-    { mods = M.leader_mode, key = 's', action = wezterm.action.PaneSelect { mode = 'Activate' } },
+    {
+      mods = M.leader_mode,
+      key = 's',
+      action = wezterm.action.PaneSelect { mode = 'Activate' },
+    },
     -- Clipboard
     { mods = M.cmd_mode, key = 'c', action = act.CopyTo 'Clipboard' },
     { mods = M.cmd_mode, key = 'v', action = act.PasteFrom 'Clipboard' },
     { mods = M.leader_mode, key = 'Enter', action = act.ActivateCopyMode },
-    { mods = M.leader_mode, key = 'f', action = act.Search 'CurrentSelectionOrEmptyString' },
+    {
+      mods = M.leader_mode,
+      key = 'f',
+      action = act.Search 'CurrentSelectionOrEmptyString',
+    },
     -- Panes
     { mods = M.leader_mode, key = 'z', action = act.TogglePaneZoomState },
     { mods = M.leader_mode, key = 'p', action = act.ActivateCommandPalette },
@@ -57,17 +81,23 @@ function M.setup(config)
     { mods = M.cmd_mode, key = '+', action = act.IncreaseFontSize },
     { mods = M.cmd_mode, key = '-', action = act.DecreaseFontSize },
     -- Scroll
-    { mods = M.cmd_mode, key = 'k', action = act.ClearScrollback 'ScrollbackAndViewport' },
+    {
+      mods = M.cmd_mode,
+      key = 'k',
+      action = act.ClearScrollback 'ScrollbackAndViewport',
+    },
     {
       mods = M.cmd_mode,
       key = ',',
       action = act.PromptInputLine {
         description = 'Enter new name for tab',
-        action = wezterm.action_callback(function(window, _, line)
-          if line then
-            window:active_tab():set_title(line)
+        action = wezterm.action_callback(
+          function(win, pane, line) ---@diagnostic disable-line
+            if line then
+              win:active_tab():set_title(line)
+            end
           end
-        end),
+        ),
       },
     },
   }
@@ -78,7 +108,11 @@ function M.setup(config)
       { mods = 'SHIFT', key = 'Tab', action = act.CopyMode 'MoveBackwardWord' },
       { mods = 'NONE', key = 'Enter', action = act.CopyMode 'MoveToStartOfNextLine' },
       { mods = 'NONE', key = 'Escape', action = act.CopyMode 'Close' },
-      { mods = 'NONE', key = 'Space', action = act.CopyMode { SetSelectionMode = 'Cell' } },
+      {
+        mods = 'NONE',
+        key = 'Space',
+        action = act.CopyMode { SetSelectionMode = 'Cell' },
+      },
       { mods = 'NONE', key = '$', action = act.CopyMode 'MoveToEndOfLineContent' },
       { mods = 'SHIFT', key = '$', action = act.CopyMode 'MoveToEndOfLineContent' },
       { mods = 'NONE', key = ',', action = act.CopyMode 'JumpReverse' },

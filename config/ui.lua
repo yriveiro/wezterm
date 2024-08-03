@@ -1,11 +1,11 @@
 local M = {}
 
 function M.setup(config)
-  config.front_end = 'WebGpu'
-  config.webgpu_power_preference = 'HighPerformance'
   config.audible_bell = 'Disabled'
   config.window_decorations = 'RESIZE'
   config.enable_kitty_graphics = true
+  config.cursor_blink_ease_in = 'Constant'
+  config.cursor_blink_ease_out = 'Constant'
 
   config.color_scheme = 'onenord'
   config.scrollback_lines = 10000

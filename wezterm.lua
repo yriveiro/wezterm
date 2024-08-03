@@ -1,11 +1,20 @@
+---@class Config: Wezterm
 local wezterm = require 'wezterm'
+
 local config = wezterm.config_builder()
 
-wezterm.log_info 'reloading'
+wezterm.log_info 'Reloading Wezterm configuration'
 
-require('core.tabs').setup(config)
-require('core.fonts').setup(config)
-require('core.keys').setup(config)
-require('core.ui').setup(config)
+require('config.keys').setup(config)
+require('config.fonts').setup(config)
+require('config.gpu').setup(config)
+require('config.ui').setup(config)
+require('config.tabs').setup(config)
+
+wezterm.plugin
+  .require('https://github.com/yriveiro/wezterm-status')
+  .apply_to_config(config, { cells = { date = {
+    format = '%H:%M',
+  } } })
 
 return config
