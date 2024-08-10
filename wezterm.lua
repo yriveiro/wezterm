@@ -5,8 +5,10 @@ local config = wezterm.config_builder()
 
 wezterm.log_info 'Reloading Wezterm configuration'
 
+--- Load key tables
 require('config.key_tables.copy').setup(config)
-require('config.key_tables.resize').setup(config)
+require('config.key_tables.pane_resize').setup(config)
+
 require('config.keys').setup(config)
 require('config.fonts').setup(config)
 require('config.gpu').setup(config)
