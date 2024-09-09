@@ -30,6 +30,15 @@ wezterm.plugin
     },
   })
 
-wezterm.plugin.require('https://github.com/yriveiro/wezterm-tabs').apply_to_config(config)
+wezterm.plugin
+  .require('https://github.com/yriveiro/wezterm-tabs')
+  .apply_to_config(config, {
+    ui = {
+      icons = {
+        ['obsidian'] = wezterm.nerdfonts.cod_checklist,
+        ['k9s'] = wezterm.nerdfonts.fa_ship,
+      },
+    },
+  })
 
 return config
