@@ -20,7 +20,7 @@ function M.setup(config)
     { key = 'j', action = act.AdjustPaneSize { 'Down', 3 } },
 
     -- Cancel the mode by pressing escape
-    { key = 'Escape', action = 'PopKeyTable' },
+    { key = 'q', action = 'PopKeyTable' },
   }
 end
 
