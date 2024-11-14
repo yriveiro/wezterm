@@ -14,6 +14,7 @@ require('config.fonts').setup(config)
 require('config.gpu').setup(config)
 require('config.ui').setup(config)
 -- require('config.tabs').setup(config)
+require 'events.triggers'
 
 wezterm.plugin
   .require('https://github.com/yriveiro/wezterm-status')
