@@ -29,6 +29,8 @@ function M.setup(config)
       key = '-',
       action = act.SplitVertical { domain = 'CurrentPaneDomain' },
     },
+
+    -- Modes
     {
       mods = M.leader,
       key = 'r',
@@ -37,6 +39,15 @@ function M.setup(config)
         one_shot = false,
       },
     },
+    {
+      mods = M.leader,
+      key = 'e',
+      action = act.ActivateKeyTable {
+        name = 'execute_mode',
+        one_shot = false,
+      },
+    },
+
     -- Move Tabs
     { mods = M.leader, key = '>', action = act.MoveTabRelative(1) },
     { mods = M.leader, key = '<', action = act.MoveTabRelative(-1) },
