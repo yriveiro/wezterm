@@ -13,7 +13,6 @@ require('config.keys').setup(config)
 require('config.fonts').setup(config)
 require('config.gpu').setup(config)
 require('config.ui').setup(config)
--- require('config.tabs').setup(config)
 require 'events.triggers'
 
 wezterm.plugin
@@ -23,9 +22,32 @@ wezterm.plugin
       date = {
         format = '%H:%M',
       },
+      workspace = { enabled = true },
+      k8s_context = { enabled = true },
       mode = {
         modes = {
           resize_mode = ' ' .. wezterm.nerdfonts.md_resize,
+        },
+      },
+      cwd = {
+        path_aliases = {
+          { pattern = '~/.kube', replacement = wezterm.nerdfonts.md_kubernetes },
+          {
+            pattern = '~/Development/github/',
+            replacement = '(' .. wezterm.nerdfonts.dev_github_alt .. '):/',
+          },
+          {
+            pattern = '~/Development/aqom/',
+            replacement = '(' .. wezterm.nerdfonts.dev_github_alt .. '):aqom:/',
+          },
+          {
+            pattern = '~/Library/Application Support/wezterm/plugins/',
+            replacement = '(wezterm-plugins):/',
+          },
+          {
+            pattern = '~/Downloads',
+            replacement = '~/' .. wezterm.nerdfonts.md_download_outline,
+          },
         },
       },
     },
@@ -38,8 +60,23 @@ wezterm.plugin
       icons = {
         ['obsidian'] = wezterm.nerdfonts.cod_checklist,
         ['k9s'] = wezterm.nerdfonts.fa_ship,
+        ['neutron'] = wezterm.nerdfonts.md_phone_plus,
+        ['ruby'] = wezterm.nerdfonts.seti_ruby,
+      },
+      tab = {
+        zoom_indicator = {
+          -- Enable zoom level indicator
+          enabled = true,
+          -- Display type of the zoom indicator
+          type = 'number',
+        },
       },
     },
   })
+
+-- HACK: wezterm only keeps the env when launch from Spotlight.
+config.set_environment_variables = {
+  PATH = '' .. os.getenv 'PATH',
+}
 
 return config
