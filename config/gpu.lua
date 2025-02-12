@@ -5,6 +5,7 @@ function M.setup(config)
   config.webgpu_power_preference = 'HighPerformance'
   config.webgpu_force_fallback_adapter = false
   config.animation_fps = 120
+  config.max_fps = 120
 end
 
 return M
