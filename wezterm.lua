@@ -7,7 +7,9 @@ wezterm.log_info 'Reloading Wezterm configuration'
 
 --- Load key tables
 require('config.key_tables.copy').setup(config)
+require('config.key_tables.execute').setup(config)
 require('config.key_tables.pane_resize').setup(config)
+require('config.key_tables.workspace').setup(config)
 
 require('config.keys').setup(config)
 require('config.fonts').setup(config)
@@ -27,27 +29,22 @@ wezterm.plugin
       mode = {
         modes = {
           resize_mode = ' ' .. wezterm.nerdfonts.md_resize,
+          execute_mode = ' ' .. wezterm.nerdfonts.md_console,
+          workspace_mode = ' ' .. wezterm.nerdfonts.md_shield,
         },
       },
       cwd = {
         path_aliases = {
           { pattern = '~/.kube', replacement = wezterm.nerdfonts.md_kubernetes },
           {
-            pattern = '~/Development/github/',
-            replacement = '(' .. wezterm.nerdfonts.dev_github_alt .. '):/',
-          },
-          {
-            pattern = '~/Development/aqom/',
-            replacement = '(' .. wezterm.nerdfonts.dev_github_alt .. '):aqom:/',
+            pattern = '~/Development/gitlab/',
+            replacement = '(' .. wezterm.nerdfonts.dev_github_badge .. '):/',
           },
           {
             pattern = '~/Library/Application Support/wezterm/plugins/',
             replacement = '(wezterm-plugins):/',
           },
-          {
-            pattern = '~/Downloads',
-            replacement = '~/' .. wezterm.nerdfonts.md_download_outline,
-          },
+          { pattern = '~/Downloads', replacement = '~/' },
         },
       },
     },
@@ -62,6 +59,7 @@ wezterm.plugin
         ['k9s'] = wezterm.nerdfonts.fa_ship,
         ['neutron'] = wezterm.nerdfonts.md_phone_plus,
         ['ruby'] = wezterm.nerdfonts.seti_ruby,
+        ['opencode'] = wezterm.nerdfonts.md_robot_angry_outline,
       },
       tab = {
         zoom_indicator = {
@@ -71,6 +69,16 @@ wezterm.plugin
           type = 'number',
         },
       },
+    },
+  })
+
+wezterm.plugin
+  .require('https://github.com/isseii10/workspace-picker.wezterm')
+  .apply_to_config(config, {
+    keybinds = {
+      show_picker = { mods = 'LEADER', key = 'w' },
+      create_workspace = { mods = 'LEADER', key = 'W' },
+      rename_workspace = { mods = 'LEADER', key = 'e' },
     },
   })
 
