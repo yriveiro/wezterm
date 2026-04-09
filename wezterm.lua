@@ -82,6 +82,10 @@ wezterm.plugin
     },
   })
 
+wezterm.plugin
+  .require('https://github.com/abidibo/wezterm-sessions')
+  .apply_to_config(config)
+
 -- HACK: wezterm only keeps the env when launch from Spotlight.
 config.set_environment_variables = {
   PATH = '' .. os.getenv 'PATH',

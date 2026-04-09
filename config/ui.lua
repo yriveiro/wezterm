@@ -1,7 +1,7 @@
 local M = {}
 
 function M.setup(config)
-  config.term = 'xterm-kitty'
+  config.term = 'wezterm'
   config.audible_bell = 'Disabled'
   config.window_decorations = 'RESIZE'
   config.enable_kitty_graphics = true
